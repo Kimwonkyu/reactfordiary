@@ -8,8 +8,10 @@ const DiaryEditor =() => {
     return <div className="DiaryEditor">
         <h2>오늘의 일기</h2>
         <div>
-            <input value={author}
-                   onChange={(e) =>{console.log(e.target.value);
+            <input
+                   name="author"
+                   value={author}
+                   onChange={(e) =>{
                    setAuthor(e.target.value);//상태를 그 값이 변경 될때마다 업데이트
             }
             }/>
