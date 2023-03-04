@@ -8,6 +8,15 @@ const DiaryEditor =() => {
        content:""
     });
 
+    //아래 onChange의 이벤트 핸들러도 중복이 되니까 이것도 단순화 시켜야 한다.
+    const handleChangeState = (e) => {
+        setState({
+            ...state,
+            [e.target.name]: e.target.value,
+        });
+    }
+
+
     //처음 선언부 삭제
     //1. 작성자를 넣기 위해 선언 (input 테그에 작성자를 넣기 위해 author를 지정 그리고 상태변화를 나타내기 위해 setAuthor 지정
     //const [author, setAuthor] = useState("");
@@ -20,9 +29,11 @@ const DiaryEditor =() => {
             <input
                    name="author"
                    value={state.author}
-                   onChange={(e) =>{
+
+                //onchange에 대한 핸들러 함수를 생성했으니 setState에서는 이 핸들러를 받도록 변경
+/*                   onChange={(e) =>{
                    setState({
-                       //**선언하는 값 ex.author등등이 만약 100개가 넘는다면 현재 위치로 예를 들자면
+                       //!**선언하는 값 ex.author등등이 만약 100개가 넘는다면 현재 위치로 예를 들자면
                        //author하나만 바꾸면 되는데 다른 변수들을 다 적는건 낭비이다 따라서
                        //필요한 변수만 변경하도록 하고 아래 ...을 써서 다른 "객체"는 그대로 받도록 단순화 시킨다.
                        ...state,
@@ -34,11 +45,15 @@ const DiaryEditor =() => {
                    //아래 호출부는 삭제하고 setState로 변경
                    //setAuthor(e.target.value);//상태를 그 값이 변경 될때마다 업데이트
             }
-            }/>
+            }*/
+                   onChange={handleChangeState}
+            />
         </div>
         <div>
-            <textarea value={state.content}
-                   onChange={(e) =>{
+            <textarea name="content" value={state.content}
+
+                //onchange에 대한 핸들러 함수를 생성했으니 setState에서는 이 핸들러를 받도록 변경
+/*                   onChange={(e) =>{
                    setState({
                        //여기는 content가 변하는 부분이기 때문에 author는 그대로 둠
                        //author: state.author,
@@ -48,7 +63,9 @@ const DiaryEditor =() => {
                    //아래 호출부는 삭제하고 setState로 변경
                    //setContent(e.target.value);
             }
-            }/>
+            }*/
+              onChange={handleChangeState}
+            />
 
         </div>
 
