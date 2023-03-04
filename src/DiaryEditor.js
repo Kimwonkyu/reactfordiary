@@ -6,7 +6,7 @@ const DiaryEditor =() => {
     const [state, setState] = useState({
        author:"",
        content:"",
-       emotion:1
+       emotion:1,
     });
 
     //아래 onChange의 이벤트 핸들러도 중복이 되니까 이것도 단순화 시켜야 한다.
@@ -15,6 +15,12 @@ const DiaryEditor =() => {
             ...state,
             [e.target.name]: e.target.value,
         });
+    }
+
+    //저장버튼 만들기
+    const handleSubmit = ()=> {
+        console.log(state);
+        alert("저장성공");
     }
 
 
@@ -70,13 +76,16 @@ const DiaryEditor =() => {
 
         </div>
         <div>
-            <select>
+            <select name="emotion" value={state.emotion} onChange={handleChangeState}>
                 <option value={1}>1</option>
                 <option value={2}>2</option>
                 <option value={3}>3</option>
                 <option value={4}>4</option>
                 <option value={5}>5</option>
             </select>
+        </div>
+        <div>
+            <button onClick={handleSubmit}>일기 저장하기</button>
         </div>
 
     </div>;
