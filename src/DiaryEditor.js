@@ -5,7 +5,8 @@ const DiaryEditor =() => {
     //*** 앞으로 동작이 비슷한 state끼리 묶을 예정이다. 효율성을 위해 아래 코드 작성***
     const [state, setState] = useState({
        author:"",
-       content:""
+       content:"",
+       emotion:1
     });
 
     //아래 onChange의 이벤트 핸들러도 중복이 되니까 이것도 단순화 시켜야 한다.
@@ -67,6 +68,15 @@ const DiaryEditor =() => {
               onChange={handleChangeState}
             />
 
+        </div>
+        <div>
+            <select>
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
+                <option value={4}>4</option>
+                <option value={5}>5</option>
+            </select>
         </div>
 
     </div>;
