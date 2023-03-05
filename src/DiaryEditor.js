@@ -1,7 +1,12 @@
 //입력값을 처리하기 위해 useState를 사용한다.
-import {useState} from "react";
+//Dom 요소에 접근하기 위해 useRef라는 리엑트의 기능을 사용한다.
+import {useRef, useState} from "react";
 
 const DiaryEditor =() => {
+    //요소에 접근하려는 목적은 작성자와, 본문이 비어있을 경우 alert을 사용하기 보다 포커스를 해주기 위함
+    const  authorInput = useRef();
+    const  contentInput = useRef();
+
     //*** 앞으로 동작이 비슷한 state끼리 묶을 예정이다. 효율성을 위해 아래 코드 작성***
     const [state, setState] = useState({
        author:"",
@@ -21,11 +26,15 @@ const DiaryEditor =() => {
     const handleSubmit = ()=> {
         //작성자를 반드시 입력 받도록 수정
         if(state.author.length < 1){
-            alert("작성자는 최소 1글자 이상 입력해주세요");
+            //alert("작성자는 최소 1글자 이상 입력해주세요");
+            //focus (위 alert은 이제 필요 없어짐)
+            authorInput.current.focus();
             return;
         }
         if(state.content.length < 5 ){
-            alert("일기 본문은 최소 5글자 이상 입력해주세요");
+            //alert("일기 본문은 최소 5글자 이상 입력해주세요");
+            //focus
+            contentInput.current.focus();//content에도 포커스 기능 넣어주기
             return;
         }
         alert("저장성공");
@@ -42,6 +51,7 @@ const DiaryEditor =() => {
         <h2>오늘의 일기</h2>
         <div>
             <input
+                   ref={authorInput} //이걸로 input 태크에 접근이 가능해짐
                    name="author"
                    value={state.author}
 
@@ -65,7 +75,10 @@ const DiaryEditor =() => {
             />
         </div>
         <div>
-            <textarea name="content" value={state.content}
+            <textarea
+                ref={contentInput}
+                name="content"
+                value={state.content}
 
                 //onchange에 대한 핸들러 함수를 생성했으니 setState에서는 이 핸들러를 받도록 변경
 /*                   onChange={(e) =>{
@@ -84,7 +97,7 @@ const DiaryEditor =() => {
 
         </div>
         <div>
-            <span>오늘의 감정점수:</span>
+            <span>오늘의 감정점수 : </span>
             <select name="emotion" value={state.emotion} onChange={handleChangeState}>
                 <option value={1}>1</option>
                 <option value={2}>2</option>
