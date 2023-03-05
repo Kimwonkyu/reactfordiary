@@ -2,7 +2,7 @@
 //Dom 요소에 접근하기 위해 useRef라는 리엑트의 기능을 사용한다.
 import {useRef, useState} from "react";
 
-const DiaryEditor =() => {
+const DiaryEditor =({onCreate}) => {
     //요소에 접근하려는 목적은 작성자와, 본문이 비어있을 경우 alert을 사용하기 보다 포커스를 해주기 위함
     const  authorInput = useRef();
     const  contentInput = useRef();
@@ -37,8 +37,16 @@ const DiaryEditor =() => {
             contentInput.current.focus();//content에도 포커스 기능 넣어주기
             return;
         }
+
+        onCreate(state.author, state.content, state.emotion);
         alert("저장성공");
-    }
+        //작성된 내용은 초기화 해야한다
+        setState({
+            author: "",
+            content: "",
+            emotion: 1,
+        });
+    };
 
 
     //처음 선언부 삭제
