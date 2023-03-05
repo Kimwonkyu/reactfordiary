@@ -19,7 +19,15 @@ const DiaryEditor =() => {
 
     //저장버튼 만들기
     const handleSubmit = ()=> {
-        console.log(state);
+        //작성자를 반드시 입력 받도록 수정
+        if(state.author.length < 1){
+            alert("작성자는 최소 1글자 이상 입력해주세요");
+            return;
+        }
+        if(state.content.length < 5 ){
+            alert("일기 본문은 최소 5글자 이상 입력해주세요");
+            return;
+        }
         alert("저장성공");
     }
 
@@ -76,6 +84,7 @@ const DiaryEditor =() => {
 
         </div>
         <div>
+            <span>오늘의 감정점수:</span>
             <select name="emotion" value={state.emotion} onChange={handleChangeState}>
                 <option value={1}>1</option>
                 <option value={2}>2</option>
