@@ -8,7 +8,7 @@ const DiaryList = ({diaryList}) => {
             <div>
                 {/*리액트에서는 .map을 리스트에서 사용하여 JSX 요소 목록을 랜더링할 때 유용하게 사용*/}
                 {diaryList.map((it)=>(
-                    <div>
+                    <div key={it.id}>
                         <div>작성자 : {it.author}</div>
                         <div>일기 : {it.content}</div>
                         <div>감정 : {it.emotion}</div>
