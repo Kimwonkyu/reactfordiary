@@ -20,4 +20,9 @@ const DiaryList = ({diaryList}) => {
         );
 };
 
+//만약에 data리스트가 넘어오지 않을 경우를 대비하여 default값을 지정한다.
+DiaryList.defaultProps={
+    diaryList: [],
+};
+
 export default DiaryList;
