@@ -63,7 +63,7 @@ const App = () => {
   };
 
   //삭제 : 하나 배열을 삭제하고 나머지를 재정렬하도록 해야한다.
-  const onDelete = (targetId) => {
+  const onRemove = (targetId) => {
     console.log(`${targetId}가 삭제 되었습니다.`);
     //새로운 diaryList를 만들게 된다 즉, 삭제되는 id와 동일한거 빼고 다시 배열을 생성
     //여기서 it의 의미는 개발자가 임의로 작성하는 것이고 이 경우에는 datq 배열의 각 요소를 나타낸다.
@@ -71,11 +71,20 @@ const App = () => {
     setData(newDiaryList); //삭제가 완성되는 시점
   };
 
+  //수정하는 기능을 만들자
+  const onEdit = (targetId, newContent) => {
+    setData(
+      data.map((it) =>
+        it.id === targetId ? { ...it, content: newContent } : it
+      )
+    );
+  };
+
   return (
     <div className="App">
       <DiaryEditor onCreate={onCreate} />
       {/*DiaryItem의 내용을 삭제하기 위해서는 그 부모인 DiaryList에 지우려는 Id를 전달해야한다.*/}
-      <DiaryList onDelete={onDelete} diaryList={data} />
+      <DiaryList onEdit={onEdit} onRemove={onRemove} diaryList={data} />
       {/*dummyList를 prop으로 전달 ==> dummy 삭제*/}
     </div>
   );
